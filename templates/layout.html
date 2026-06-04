@@ -5,43 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}{% endblock %}</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
 </head>
 
 <body>
-
     <div class="container">
-
         <aside class="sidebar">
-
             <div class="logo">
-                <h2>Administracion</h2>
+                <h2>Administración</h2>
             </div>
-
             <nav>
-                <a href="#">Dashboard</a>
+                <a href="/dashboard">Dashboard</a>
                 <a href="#">Categorías</a>
                 <a href="#">Productos</a>
                 <a href="#">Clientes</a>
                 <a href="#">Ventas</a>
             </nav>
-
             <div class="logout">
-                <a href="#">Cerrar Sesión</a>
+                <a href="/logout">Cerrar Sesión</a>
             </div>
-
         </aside>
 
         <main class="content">
-
             {% block contenido %}
             {% endblock %}
-
         </main>
-
     </div>
-
 </body>
 
 </html>

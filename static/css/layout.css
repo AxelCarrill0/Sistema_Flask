@@ -1,15 +1,16 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-.container{
+.container {
     display: flex;
     min-height: 100vh;
 }
 
-.sidebar{
+.sidebar {
     width: 220px;
     background-color: #3A4459;
     padding: 20px;
@@ -17,26 +18,29 @@
     flex-direction: column;
 }
 
-.logo{
+.logo {
     margin-bottom: 30px;
     color: white;
+    font-size: 14px;
 }
 
-
-nav{
+nav {
     flex: 1;
 }
 
 nav a,
-.logout a{
+.logout a {
     display: block;
-    color: white;
+    color: #cbd5e1;
     text-decoration: none;
-    padding: 10px 0;
+    padding: 12px 10px;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-.content{
+.content {
     flex: 1;
-    padding: 20px;
-    background-color: white;
+    padding: 30px;
+    background-color: #f4f6f9;
 }

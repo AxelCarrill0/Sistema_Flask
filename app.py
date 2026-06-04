@@ -1,34 +1,23 @@
-from flask import Flask, render_template, request, redirect
-
-from config.database import configurar_db
-from models.usuarios import Usuario
+from flask import Flask, session, redirect, render_template
+from config.database import mysql, configurar_db
+from controllers.auth import auth_bp
 
 app = Flask(__name__)
 
 configurar_db(app)
 
+app.secret_key = 'sistema_flask_secret_key_123'
+
+app.register_blueprint(auth_bp)
 
 @app.route('/')
-def login():
-    return render_template('login/login.html')
-
-
-@app.route('/validar_login', methods=['POST'])
-def validar_login():
-
-    usuario = request.form['usuario']
-    password = request.form['password']
-
-    usuario_model = Usuario()
-
-    if usuario_model.validar_login(usuario, password):
-        return redirect('/dashboard')
-
-    return "Usuario o contraseña incorrectos"
-
+def index():
+    return redirect('/login')
 
 @app.route('/dashboard')
 def dashboard():
+    if 'usuario' not in session:
+        return redirect('/login')
     return render_template('dashboard/dashboard.html')
 
 

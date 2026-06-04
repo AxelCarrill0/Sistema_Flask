@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mueblería</title>
+    <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 
@@ -13,7 +13,9 @@
         <h3>Sistema de Gestión para Mueblería</h3>
         <h1>Iniciar Sesión</h1>
 
-        <form action="{{ url_for('validar_login') }}" method="POST">
+        {% if error_msg %} {{ error_msg }} {% endif %}
+
+        <form action="{{ url_for('auth.validar_login') }}" method="POST">
             <div class="form-group">
                 <label for="usuario">Usuario</label>
                 <input type="text" id="usuario" name="usuario" required autocomplete="username">
