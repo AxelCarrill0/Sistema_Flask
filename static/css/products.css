@@ -1,0 +1,111 @@
+.crud-container {
+    display: flex;
+    gap: 30px;
+}
+
+.form-card {
+    flex: 1;
+    max-width: 350px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 7px;
+    outline: none;
+    resize: none;
+}
+
+
+.form-card button, .btn-save {
+    width: 100%;
+    padding: 10px;
+    background-color: #3A4459;
+    color: white;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/* css para la tabla */
+.table-card {
+    flex: 2;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+
+
+/* Botones de acción */
+.btn-edit, .btn-delete, .btn-cancel {
+    display: inline-block;
+    padding: 6px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.btn-edit {
+    background-color: #8FA382;
+}
+
+.btn-delete {
+    background-color: #3A4459;
+}
+
+.btn-cancel {
+    background-color: #ccc;
+    color: #8FA382;
+}
+
+/* Pantalla de Edición */
+.edit-card {
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 0 auto;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}

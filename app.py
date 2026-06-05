@@ -1,14 +1,18 @@
 from flask import Flask, session, redirect, render_template
 from config.database import mysql, configurar_db
-from controllers.auth import auth_bp
+from controllers.auth_controller import auth_bp
+from controllers.categories_controller import categories_bp
+from controllers.products_controller import products_bp
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
 configurar_db(app)
 
 app.secret_key = 'sistema_flask_secret_key_123'
 
 app.register_blueprint(auth_bp)
+app.register_blueprint(categories_bp)
+app.register_blueprint(products_bp) 
 
 @app.route('/')
 def index():

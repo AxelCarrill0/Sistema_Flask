@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+{% endblock %}
+
+{% block titulo %}Productos - Sistema Mueblería{% endblock %}
+
+{% block contenido %}
+<div class="crud-container">
+
+    <div class="form-card">
+        <h2>Nuevo Producto</h2>
+        <form action="/productos/crear" method="POST">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="material">Material</label>
+                <input type="text" id="material" name="material" required>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" name="precio" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" name="stock" required>
+            </div>
+            <div class="form-group">
+                <label for="id_categoria">Categoría</label>
+                <select id="id_categoria" name="id_categoria" required>
+                    <option value="">Seleccione una categoría</option>
+                    {% for cat in categorias %}
+                    <option value="{{ cat.0 }}">{{ cat.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn-save">Guardar</button>
+        </form>
+    </div>
+
+    <div class="table-card">
+        <h2>Listado de Productos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Material</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Categoría ID</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prod in productos %}
+                <tr>
+                    <td>{{ prod.0 }}</td>
+                    <td>{{ prod.1 }}</td>
+                    <td>{{ prod.3 }}</td>
+                    <td class="text-price">${{ "%.2f"|format(prod.4) }}</td>
+                    <td>
+                        <span class="text-stock 
+                            {% if prod.5 <= 5 %}low
+                            {% elif prod.5 <= 15 %}medium
+                            {% else %}high
+                            {% endif %}">
+                            {{ prod.5 }}
+                        </span>
+                    </td>
+                    <td>{{ prod.6 }}</td>
+                    <td>
+                        <a href="/productos/editar/{{ prod.0 }}" class="btn-edit">Editar</a>
+                        <a href="/productos/eliminar/{{ prod.0 }}" class="btn-delete"
+                           onclick="return confirm('¿Seguro que deseas eliminar este producto?');">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

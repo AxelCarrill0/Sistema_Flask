@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    {% block custom_css %}{% endblock %}
 </head>
 
-<body>
+<body>  
     <div class="container">
         <aside class="sidebar">
             <div class="logo">
@@ -16,8 +17,8 @@
             </div>
             <nav>
                 <a href="/dashboard">Dashboard</a>
-                <a href="#">Categorías</a>
-                <a href="#">Productos</a>
+                <a href="/categorias">Categorías</a>
+                <a href="/productos">Productos</a>
                 <a href="#">Clientes</a>
                 <a href="#">Ventas</a>
             </nav>

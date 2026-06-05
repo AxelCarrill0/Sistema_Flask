@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}">
+{% endblock %}
+
+{% block titulo %}Editar Categoría - Sistema Mueblería{% endblock %}
+
+{% block contenido %}
+<div class="edit-card">
+    <h2>Editar Categoría</h2>
+    <form action="/categorias/actualizar/{{ categoria.0 }}" method="POST">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" value="{{ categoria.1 }}" required>
+        </div>
+        <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" rows="4">{{ categoria.2 }}</textarea>
+        </div>
+        <div class="button-group">
+            <button type="submit" class="btn-save">Guardar Cambios</button>
+            <a href="/categorias" class="btn-cancel">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
