@@ -18,7 +18,9 @@ def validar_login():
         datos_usuario = obj_usuario.validar_login(txt_usuario, txt_password)
 
         if datos_usuario:
-            session['usuario'] = datos_usuario[1]  
+            session['id_usuario'] = datos_usuario[0]
+            session['nombre_usuario'] = datos_usuario[1]
+            session['usuario'] = datos_usuario[2]  
             return redirect('/dashboard')
         else:
             return render_template('auth/login.html', error_msg="Usuario o contraseña incorrectos")
