@@ -44,3 +44,27 @@ class Producto(BaseModel):
         cursor.execute(sql, (nuevo_stock, id_producto))
         mysql.connection.commit()
         cursor.close()
+
+    def contar(self):
+        cursor = mysql.connection.cursor()
+        sql = "SELECT COUNT(*) FROM productos"
+        cursor.execute(sql)
+        resultado = cursor.fetchone()
+        cursor.close()
+        return resultado[0]
+    
+    def contar_bajo_stock(self, limite=5):
+        cursor = mysql.connection.cursor()
+        sql = "SELECT COUNT(*) FROM productos WHERE stock <= %s"
+        cursor.execute(sql, (limite,))
+        resultado = cursor.fetchone()
+        cursor.close()
+        return resultado[0]
+    
+    def listar_bajo_stock(self, limite=5):
+        cursor = mysql.connection.cursor()
+        sql = "SELECT nombre, stock FROM productos WHERE stock <= %s ORDER BY stock ASC"
+        cursor.execute(sql, (limite,))
+        resultado = cursor.fetchall()
+        cursor.close()
+        return resultado

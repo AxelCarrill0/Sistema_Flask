@@ -78,3 +78,11 @@ class Cliente(BaseModel):
         cursor.close()
 
         return resultado
+    
+    def contar(self):
+        cursor = mysql.connection.cursor()
+        sql = "SELECT COUNT(*) FROM clientes"
+        cursor.execute(sql)
+        resultado = cursor.fetchone()
+        cursor.close()
+        return resultado[0]

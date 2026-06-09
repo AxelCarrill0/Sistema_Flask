@@ -3,5 +3,123 @@
 {% block titulo %}Dashboard - Sistema Mueblería{% endblock %}
 
 {% block contenido %}
-<h1>¡Bienvenido al Dashboard, {{ session['usuario'] }}!</h1>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+<div class="dashboard">
+
+  <div class="bienvenida">
+    <h2>¡Bienvenido, {{ session['usuario'] }}!</h2>
+  </div>
+
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-info">
+        <span class="kpi-label">Ventas del mes</span>
+        <span class="kpi-value">${{ total_ventas }}</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-info">
+        <span class="kpi-label">Productos en stock</span>
+        <span class="kpi-value">{{ total_productos }}</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-info">
+        <span class="kpi-label">Clientes registrados</span>
+        <span class="kpi-value">{{ total_clientes }}</span>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-info">
+        <span class="kpi-label">Facturas emitidas</span>
+        <span class="kpi-value">{{ total_facturas }}</span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row-2col">
+
+
+    <div class="db-card">
+      <h3 class="card-title">Productos más vendidos</h3>
+      <div class="bar-list">
+        {% for p in productos_mas_vendidos %}
+        <div class="bar-row">
+          <span class="bar-label">{{ p.nombre }}</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: {{ p.porcentaje }}%;"></div>
+          </div>
+          <span class="bar-val">{{ p.cantidad }} u.</span>
+        </div>
+        {% else %}
+        <p class="empty-msg">No hay datos aún.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+  
+    <div class="db-card">
+      <h3 class="card-title">Alertas de stock bajo</h3>
+      <div class="stock-list">
+        {% for p in alertas_stock %}
+        <div class="stock-item">
+          <span class="stock-name">{{ p.nombre }}</span>
+          <span class="stock-qty {% if p.stock <= 3 %}qty-danger{% elif p.stock <= 7 %}qty-warning{% else %}qty-ok{% endif %}">
+            {{ p.stock }} u.
+          </span>
+        </div>
+        {% else %}
+        <p class="empty-msg">Sin alertas de stock.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+ 
+  <div class="db-card">
+    <div class="card-header-row">
+      <h3 class="card-title">Últimas ventas registradas</h3>
+      <a href="{{ url_for('ventas.index') }}" class="ver-todas">Ver todas</a>
+    </div>
+    <div class="table-wrap">
+      <table class="ventas-table">
+        <thead>
+          <tr>
+            <th>N° Factura</th>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for v in ultimas_ventas %}
+          <tr>
+            <td class="text-muted">#{{ v.numero_factura }}</td>
+            <td>{{ v.cliente_nombre }}</td>
+            <td class="text-muted">{{ v.fecha }}</td>
+            <td><strong>${{ v.total }}</strong></td>
+            <td>
+              <a href="{{ url_for('ventas.detalle', id_venta=v.id_venta) }}" class="btn-detalle">
+                Ver detalle
+              </a>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="5" class="empty-msg text-center">No hay ventas registradas.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
 {% endblock %}
