@@ -61,14 +61,15 @@
       </div>
     </div>
 
-  
+
     <div class="db-card">
       <h3 class="card-title">Alertas de stock bajo</h3>
       <div class="stock-list">
         {% for p in alertas_stock %}
         <div class="stock-item">
           <span class="stock-name">{{ p.nombre }}</span>
-          <span class="stock-qty {% if p.stock <= 3 %}qty-danger{% elif p.stock <= 7 %}qty-warning{% else %}qty-ok{% endif %}">
+          <span
+            class="stock-qty {% if p.stock <= 3 %}qty-danger{% elif p.stock <= 7 %}qty-warning{% else %}qty-ok{% endif %}">
             {{ p.stock }} u.
           </span>
         </div>
@@ -80,7 +81,7 @@
 
   </div>
 
- 
+
   <div class="db-card">
     <div class="card-header-row">
       <h3 class="card-title">Últimas ventas registradas</h3>

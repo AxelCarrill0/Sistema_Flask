@@ -1,3 +1,3 @@
 git add .   
-git commit -m "controlador para dashboard y correcion"    
+git commit -m "Mejoras visales generales"    
 git push -u origin main 

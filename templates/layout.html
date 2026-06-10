@@ -10,28 +10,26 @@
 </head>
 
 <body>  
-    <div class="container">
-        <aside class="sidebar">
-            <div class="logo">
-                <h2>Administración</h2>
-            </div>
-            <nav>
-                <a href="/dashboard">Dashboard</a>
-                <a href="/categorias">Categorías</a>
-                <a href="/productos">Productos</a>
-                <a href="/clientes">Clientes</a>
-                <a href="/ventas">Ventas</a>
-            </nav>
-            <div class="logout">
-                <a href="/logout">Cerrar Sesión</a>
-            </div>
-        </aside>
+    <header class="topbar">
+        <div class="topbar-brand">
+            <h2>Administración</h2>
+        </div>
+        <nav class="topbar-nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/categorias">Categorías</a>
+            <a href="/productos">Productos</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/ventas">Ventas</a>
+        </nav>
+        <div class="topbar-logout">
+            <a href="/logout">Cerrar Sesión</a>
+        </div>
+    </header>
 
-        <main class="content">
-            {% block contenido %}
-            {% endblock %}
-        </main>
-    </div>
+    <main class="content">
+        {% block contenido %}
+        {% endblock %}
+    </main>
 </body>
 
 </html>
