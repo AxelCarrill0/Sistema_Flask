@@ -8,96 +8,127 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sales.css') }}">
 </head>
 
-<body>
+<body class="factura-body">
 
     <div class="factura-container">
 
-        <div class="header">
+        <div class="factura-card">
 
-            <div>
-                <h1>Mueblería</h1>
-                <p>Sistema de Gestión</p>
+            <div class="header">
+                <div class="empresa-info">
+                    <h1>Mueblería</h1>
+                    <p>Sistema de Gestión</p>
+                </div>
+
+                <div class="factura-info">
+                    <h2>FACTURA</h2>
+                    <span>{{ venta.1 }}</span>
+                    <p>{{ venta.2 }}</p>
+                </div>
             </div>
 
-            <div class="factura-info">
-                <h2>FACTURA</h2>
-                <p>{{ venta.1 }}</p>
-                <p>{{ venta.2 }}</p>
+            <hr class="separador">
+
+            <div class="cliente-card">
+
+                <h3>Información del Cliente</h3>
+
+                <div class="cliente-grid">
+                    <div>
+                        <strong>Nombre</strong>
+                        <p>{{ venta.6 }}</p>
+                    </div>
+
+                    <div>
+                        <strong>Cédula</strong>
+                        <p>{{ venta.7 }}</p>
+                    </div>
+
+                    <div>
+                        <strong>Teléfono</strong>
+                        <p>{{ venta.8 }}</p>
+                    </div>
+
+                    <div>
+                        <strong>Correo</strong>
+                        <p>{{ venta.9 }}</p>
+                    </div>
+                </div>
+
+                <div class="direccion">
+                    <strong>Dirección</strong>
+                    <p>{{ venta.10 }}</p>
+                </div>
+
             </div>
 
-        </div>
+            <div class="tabla-container">
 
-        <div class="card">
+                <table class="tabla-factura">
 
-            <h3>Datos del Cliente</h3>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
 
-            <p><strong>Nombre:</strong> {{ venta.6 }}</p>
-            <p><strong>Cédula:</strong> {{ venta.7 }}</p>
-            <p><strong>Teléfono:</strong> {{ venta.8 }}</p>
-            <p><strong>Correo:</strong> {{ venta.9 }}</p>
-            <p><strong>Dirección:</strong> {{ venta.10 }}</p>
+                    <tbody>
 
-        </div>
+                        {% for item in detalles %}
 
-        <table>
+                        <tr>
+                            <td>{{ item.0 }}</td>
+                            <td>{{ item.1 }}</td>
+                            <td>${{ "%.2f"|format(item.2) }}</td>
+                            <td>${{ "%.2f"|format(item.3) }}</td>
+                        </tr>
 
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
+                        {% endfor %}
 
-            <tbody>
+                    </tbody>
 
-                {% for item in detalles %}
+                </table>
 
-                <tr>
-                    <td>{{ item.0 }}</td>
-                    <td>{{ item.1 }}</td>
-                    <td>${{ "%.2f"|format(item.2) }}</td>
-                    <td>${{ "%.2f"|format(item.3) }}</td>
-                </tr>
-
-                {% endfor %}
-
-            </tbody>
-
-        </table>
-
-        <div class="totales">
-
-            <div>
-                <span>Subtotal</span>
-                <strong>${{ "%.2f"|format(venta.3) }}</strong>
             </div>
 
-            <div>
-                <span>IVA</span>
-                <strong>${{ "%.2f"|format(venta.4) }}</strong>
+            <div class="totales">
+
+                <div class="fila-total">
+                    <span>Subtotal</span>
+                    <strong>${{ "%.2f"|format(venta.3) }}</strong>
+                </div>
+
+                <div class="fila-total">
+                    <span>IVA (15%)</span>
+                    <strong>${{ "%.2f"|format(venta.4) }}</strong>
+                </div>
+
+                <div class="fila-total total-final">
+                    <span>Total</span>
+                    <strong>${{ "%.2f"|format(venta.5) }}</strong>
+                </div>
+
             </div>
 
-            <div class="total-final">
-                <span>Total</span>
-                <strong>${{ "%.2f"|format(venta.5) }}</strong>
+            <div class="acciones">
+
+                <a href="/ventas" class="btn-volver">
+                    ← Volver a Ventas
+                </a>
+
+                <button onclick="window.print()" class="btn-imprimir">
+                    🖨 Imprimir Factura
+                </button>
+
             </div>
-
-        </div>
-
-        <div class="acciones">
-
-            <a href="/ventas" class="btn-volver">
-                ← Volver a Ventas
-            </a>
-
-            <button onclick="window.print()" class="btn-imprimir">
-                🖨 Imprimir Factura
-            </button>
 
         </div>
 
     </div>
 
 </body>
+
+</html>
