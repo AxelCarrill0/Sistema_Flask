@@ -4,8 +4,8 @@ from controllers.auth_controller import auth_bp
 from controllers.categories_controller import categories_bp
 from controllers.products_controller import products_bp
 from controllers.customers_controller import customers_bp
-from controllers.ventas_controller import ventas_bp
-from models.venta import Venta
+from controllers.sales_controller import ventas_bp
+from models.sale import Venta
 from models.product import Producto
 from models.customer import Cliente
 

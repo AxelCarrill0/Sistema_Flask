@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, request, redirect, session, flash
 
 from models.customer import Cliente
 from models.product import Producto
-from models.venta import Venta
-from models.detalle_venta import DetalleVenta
+from models.sale import Venta
+from models.sale_detail import DetalleVenta
 
 ventas_bp = Blueprint('ventas', __name__)
 
@@ -36,7 +36,7 @@ def index():
     cliente_seleccionado = session.get('id_cliente')
 
     return render_template(
-        'ventas/ventas.html',
+        'sales/sales.html',
         clientes=clientes,
         productos=productos,
         carrito=carrito,
@@ -213,7 +213,7 @@ def detalle(id_venta):
     detalles = obj_detalle.obtener_detalles(id_venta)
 
     return render_template(
-        'ventas/detalle_venta.html',
+        'sales/sales_detail.html',
         venta=venta,
         detalles=detalles
     )
@@ -231,7 +231,7 @@ def factura(id_venta):
     detalles = obj_detalle.obtener_detalles(id_venta)
 
     return render_template(
-        'ventas/factura.html',
+        'sales/factura.html',
         venta=venta,
         detalles=detalles
     )
