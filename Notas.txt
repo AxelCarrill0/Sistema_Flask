@@ -1,3 +1,3 @@
 git add .   
-git commit -m "avance categorias y productos"    
+git commit -m "correccion de nombres de archivos"    
 git push -u origin main 
