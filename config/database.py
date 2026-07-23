@@ -1,11 +1,19 @@
-from flask_mysqldb import MySQL
+import mysql.connector as db_connector
 
-mysql = MySQL()
+class MySQLWrapper:
+    def __init__(self):
+        self._connection = None
 
-def configurar_db(app):
-    app.config['MYSQL_HOST'] = 'localhost'
-    app.config['MYSQL_USER'] = 'root'
-    app.config['MYSQL_PASSWORD'] = 'A001'
-    app.config['MYSQL_DB'] = 'proyecto_flask'
-    
-    mysql.init_app(app)
+    @property
+    def connection(self):
+        if self._connection is None or not self._connection.is_connected():
+            self._connection = db_connector.connect(
+                host='localhost',
+                user='root',
+                password='A001',
+                database='proyecto_flask'
+            )
+        return self._connection
+
+# Objeto global mysql para mantener compatibilidad con todos los modelos
+mysql = MySQLWrapper()

@@ -1,28 +1,40 @@
-from flask import Flask, redirect
-from config.database import configurar_db
-from controllers.auth_controller import auth_bp
-from controllers.categories_controller import categories_bp
-from controllers.products_controller import products_bp
-from controllers.customers_controller import customers_bp
-from controllers.sales_controller import ventas_bp
-from controllers.dashboard_controller import dashboard_bp
+import tkinter as tk
+from views.login_view import LoginView
+from views.main_window import MainWindow
 
-app = Flask(__name__) 
+class SistemaApp:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("Sistema de Gestión y Ventas (Tkinter - MVC)")
+        self.root.geometry("1100x700")
+        self.root.minsize(950, 600)
 
-configurar_db(app)
+        self.current_user = None
+        self.current_screen = None
 
-app.secret_key = 'sistema_flask_secret_key_123'
+        self.mostrar_login()
 
-app.register_blueprint(auth_bp)
-app.register_blueprint(categories_bp)
-app.register_blueprint(products_bp)
-app.register_blueprint(customers_bp)
-app.register_blueprint(ventas_bp)
-app.register_blueprint(dashboard_bp)
+    def mostrar_login(self):
+        if self.current_screen:
+            self.current_screen.destroy()
 
-@app.route('/')
-def index():
-    return redirect('/login')
+        self.current_user = None
+        self.current_screen = LoginView(self.root, on_login_success=self.on_login_success)
+
+    def on_login_success(self, user_data):
+        self.current_user = user_data
+        if self.current_screen:
+            self.current_screen.destroy()
+
+        self.current_screen = MainWindow(
+            self.root, 
+            user_session=self.current_user, 
+            on_logout=self.mostrar_login
+        )
+
+    def run(self):
+        self.root.mainloop()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app = SistemaApp()
+    app.run()

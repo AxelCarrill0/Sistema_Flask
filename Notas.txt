@@ -1,3 +1,5 @@
 git add .   
 git commit -m "Mejoras visales generales"    
 git push -u origin main 
+
+python app.py  <-- Ejecutar aplicacion
