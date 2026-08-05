@@ -15,5 +15,5 @@ class MySQLWrapper:
             )
         return self._connection
 
-# Objeto global mysql para mantener compatibilidad con todos los modelos
+
 mysql = MySQLWrapper()
